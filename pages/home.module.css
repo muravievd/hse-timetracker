@@ -1,0 +1,122 @@
+.Home {
+    margin: 4vh 2vw;
+}
+
+.HomeHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.HomeHead_logo {
+    width: 15vw;
+}
+
+.HomeHead_userSpace {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.HomeHead_userName {
+    font-weight: 600;
+}
+
+.HomeHead_exitbtn {
+    font-weight: 400;
+    opacity: .2;
+}
+
+.HomeBar {
+    padding-top: 4vh;
+    display: flex;
+    flex-direction: row;
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+.HomeBar div {
+    padding-right: 1vw;
+    opacity: .2;
+}
+
+.HomeFilters {
+    padding-top: 3vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.HomeFiltersEntity {
+    margin-right: 1vw;
+    font-weight: 600;
+    font-size: 1.3vw;
+    opacity: .2;
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    border-color: black;
+}
+
+.HomeContent {
+    padding-top: 3vh;
+}
+
+.HomeClass {
+    font-weight: 600;
+    font-size: 1.5vw;
+    color: #102D69;
+    padding-bottom: 1vh;
+}
+
+.HomeClassContent {
+    display: flex;
+    flex-direction: row;
+}
+
+.HomeClassEntity {
+    width: 25%;
+    padding-right: 3vw;
+}
+
+.HomeClassDay {
+    font-weight: 600;
+    font-size: 1.5vw;
+}
+
+.HomeContentEntity {
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    padding: 2vh 0 5vh 0;
+    border-color: #000000;
+}
+
+.HCE_infoContainer {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.2vw;
+    justify-content: space-between;
+}
+
+.HCE_roomContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.HCE_roomTime {
+    opacity: .2;
+}
+
+.HCE_roomHighlight {
+    font-weight: 500;
+    color: #7D50B9;
+    opacity: 1;
+}
+
+.HCE_roomContainer div {
+    padding-right: .5vw;
+
+}
+
+.HCE_title {
+    font-size: 1.4vw;
+    font-weight: 600;
+}
