@@ -3,6 +3,7 @@ import Home from './home'
 import './index.css'
 import './HSE_Sans.css'
 
+
 export const customLoader = ({ src }) => {
     return src
   }
