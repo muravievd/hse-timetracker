@@ -9,6 +9,9 @@ import $ from 'jquery'
 import gsap from 'gsap'
 
 var filterState = 0
+var filtersArray = {
+    group: []
+}
 
 function HomeHead(props){
     return(
@@ -99,7 +102,7 @@ export default function Home(props){
         setContent(fillSchedule(data, setContentDetails))
         var filterData = []
         for(const filterEntity of data.classes){
-            filterData.push(filterEntity)
+            filtersArray.group.push(filterEntity)
         }
         setFilters(<HomeFiltersEntity title="Все группы" content={data} />)
         gsap.fromTo('.IndexPlaceholder', {top: '0%', opacity: '1'}, {top: '-2%', opacity: '0', duration: .5})
@@ -112,18 +115,21 @@ export default function Home(props){
     }, [])
     return(
         <div id='HomePage' className={styles.Home}>
-            <HomeHead userName="Муравьев Дмитрий Александрович" />
-            <div id='HomeBar' className={styles.HomeBar}>
-                <div style={{"opacity": 1}} id='HomeBar_schedule'>Расписание</div>
-                <div id='HomeBar_rooms'></div>
-                <div id='HomeBar_absent'></div>
-            </div>
-            <div id='HomeFilters' className={styles.HomeFilters}>
-                {filters}
-                <HomeFiltersEntity title="2022/2023" />
-                <HomeFiltersEntity title="Курс 1" />
-                <HomeFiltersEntity title="Бакалавриат" />
-                <HomeFiltersEntity title="Очная" />
+            <div className={styles.HomeBar_container}>
+                <HomeHead userName="Муравьев Дмитрий Александрович" />
+                <div id='HomeBar' className={styles.HomeBar}>
+                    <div style={{"opacity": 1}} id='HomeBar_schedule'>Расписание</div>
+                    <div id='HomeBar_rooms'></div>
+                    <div id='HomeBar_absent'></div>
+                </div>
+                <div className={styles.HomeSeparator}></div>
+                <div id='HomeFilters' className={styles.HomeFilters}>
+                    {filters}
+                    <HomeFiltersEntity title="2022/2023" />
+                    <HomeFiltersEntity title="Курс 1" />
+                    <HomeFiltersEntity title="Бакалавриат" />
+                    <HomeFiltersEntity title="Очная" />
+                </div>
             </div>
             <div onScroll={() => hideHead()} id="HomeContent" className={styles.HomeContent}>
                 {content}
@@ -135,16 +141,14 @@ export default function Home(props){
 
 function hideHead(){
     var headScroll = $("#HomeContent").scrollTop()
-    if(headScroll > 200){
+    if(headScroll > 50){
         gsap.to("#HomeBar_schedule", {opacity: '0', y: -10, duration: .2})
         gsap.to("#HomeFilters", {opacity: '0', height: '0px', paddingTop: "0vh", y: -10, duration: .2})
         gsap.to("#HomeBar", {height: "0px", paddingTop: "0vh", duration: .2})
-        gsap.to("#HomeContent", {height: "90vh", duration: .2})
     } else {
         gsap.to("#HomeBar_schedule", {opacity: '1', y: 0, duration: .2})
         gsap.to("#HomeFilters", {opacity: '1', paddingTop: "3vh", height: 'auto', y: 0, duration: .2})
         gsap.to("#HomeBar", {height: "auto", paddingTop: "4vh", duration: .2})
-        gsap.to("#HomeContent", {height: "73vh", duration: .2})
     }
 
 }
@@ -185,24 +189,23 @@ function HomeContentEntity(props){
         <div onClick={props.onClick} className={styles.HomeContentEntity}>
             <div className={styles.HCE_infoContainer}>
                 <div className={styles.HCE_infoContainerEntity}>{props.time}</div>
+                <div className={styles.HCE_roomHighlight}>{props.type}</div>
                 <div className={styles.HCE_infoContainerEntity}>{props.room}</div>
             </div>
-            <div className={styles.HCE_roomContainer}>
-                <div className={styles.HCE_roomHighlight}>{props.type}</div>
-                <div className={styles.HCE_roomTime}>{props.classTime}</div>
+            <div className={styles.HCE_titleContainer}>
+                <div className={styles.HCE_title}>{props.title}</div>
+                <div className={styles.HCE_host}>{props.host}</div>
             </div>
-            <div className={styles.HCE_title}>{props.title}</div>
-            <div className={styles.HCE_host}>{props.host}</div>
         </div>
     )
 }
 
 function HomeFiltersEntity(props) {
     var [filterContent, setFilterContent] = useState([])
-    var selector = ["Entry", "Entry", "Entry", "Entry", "Entry"]
     var selectorContent = []
-    for(const selectorEntity of selector){
-        selectorContent.push(<HomeFiltersSelectorEntity title={selectorEntity} />,)
+    for(const selectorEntity of filtersArray.group){
+        console.log(selectorEntity)
+        selectorContent.push(<HomeFiltersSelectorEntity title={selectorEntity.group} />,)
     }
     var filterCompiled = []
     const displayContents = () => {
