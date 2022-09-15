@@ -1,9 +1,9 @@
 body {
-    overflow: hidden;
     padding: 0;
     margin: 0;
     border: 0;
     font-family: 'HSE Sans';
+    overflow-x: hidden;
 }
 
 .IndexPlaceholder {
@@ -12,13 +12,28 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #ffffff;
-    z-index: 100;
+    z-index: 300;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
+.IndexPlayer {
+    height: 5vw;
+    width: 5vw;
+}
+
 .IndexLogo {
     padding-left: 1vw;
+}
+
+@media only screen and (max-width: 600px) {
+    .IndexLogo {
+        display: none;
+    }
+    .IndexPlayer {
+        height: 50vw;
+        width: 50vw;
+    }
 }
