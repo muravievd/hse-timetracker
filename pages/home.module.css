@@ -11,6 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: #ffffff;
+    will-change: transform;
 }
 
 .HomeHead_logo {
@@ -39,6 +40,7 @@
     padding-top: 4vh;
     width: 95%;
     background-color: #ffffff;
+    will-change: transform;
 }
 
 .HomeBar {
@@ -47,6 +49,7 @@
     flex-direction: row;
     font-size: 5vw;
     font-weight: 400;
+    will-change: transform;
 }
 
 .HomeBar div {
@@ -58,12 +61,14 @@
     height: 1px;
     width: 100%;
     background-color: #000000;
+    will-change: transform;
 }
 
 .HomeFilters {
     padding-top: 3vh;
     display: flex;
     flex-direction: row;
+    will-change: transform;
 }
 
 .HomeFiltersEntity {
@@ -83,18 +88,38 @@
 }
 
 .HomeFiltersEntity_selector {
+    margin-top: 1vh;
+    border-radius: 5px;
     position: absolute;
     z-index: 100;
     width: 250%;
     height: 30vh;
-    background-color: rgb(184, 184, 184);
+    background-color: rgb(211, 211, 211);
     overflow: scroll;
+    opacity: 0;
+}
+
+.HomeFilterSE_status {
+    border-width: 2px;
+    width: 1vw;
+    height: 1vw;
+    border-color: #00000067;
+    border-style: solid;
+    border-radius: 10px;
 }
 
 .HomeFiltersSelectorEntity {
     font-weight: 500;
     font-size: 1.2vw;
     padding: .8vw 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.HomeFiltersSelectorEntity:hover {
+    background-color: #ffffff52;
 }
 
 .HomeContent {
@@ -105,6 +130,7 @@
     padding-left: 5%;
     width: 100%;
     padding-top: 35vh;
+    will-change: transform;
 }
 
 .HomeClass {

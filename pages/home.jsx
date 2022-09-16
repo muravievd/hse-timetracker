@@ -27,65 +27,124 @@ function HomeHead(props){
     )
 }
 
-function fillSchedule(data, detailsFunc){
+function fillSchedule(data, detailsFunc, datasel){
     var timetracker_schedule = data
     console.log(timetracker_schedule)
     if (typeof window !== 'undefined') {
         var schedule = []
-        for(const classEntity of timetracker_schedule.classes){
-            var classContainer = []
-            var classContent = []
-            var scheduleContainer = []
-            classContainer.push(
-                <div className={styles.HomeClass}>{classEntity.group}</div>  
-            )
-            for(const scheduleDay in classEntity.timetable){
-                if(classEntity.timetable[scheduleDay].length > 0){
-                    for(const scheduleEntity of classEntity.timetable[scheduleDay]){
-                        scheduleContainer.push(<HomeContentEntity onClick={() => displayHCDetails(detailsFunc, {time: scheduleEntity.time, room: scheduleEntity.room, type: scheduleEntity.type, title: scheduleEntity.title, host: scheduleEntity.host})} time={scheduleEntity.time} room={scheduleEntity.room} type={scheduleEntity.type} classTime={scheduleEntity.note} title={scheduleEntity.title} host={scheduleEntity.host}/>)
-                    }
-                    var classDay
-                    switch(scheduleDay){
-                        case "mon": {
-                            classDay = "Пн"
-                        }; break;
-                        case "tue": {
-                            classDay = "Вт"
-                        }; break;
-                        case "wed": {
-                            classDay = "Ср"
-                        }; break;
-                        case "thu": {
-                            classDay = "Чт"
-                        }; break;
-                        case "fri": {
-                            classDay = "Пт"
-                        }; break;
-                        case "sat": {
-                            classDay = "Сб"
-                        }; break;
-                        case "sun": {
-                            classDay = "Вс"
-                        }; break;
-                    }
-                    classContent.push(
-                        <div className={styles.HomeClassEntity}>
-                            <div className={styles.HomeClassDay}>{classDay}</div>
-                            <div className={styles.HomeClassDayContent}>
-                                {scheduleContainer}
+        if(!datasel){
+            for(const classEntity of timetracker_schedule.classes){
+                var classContainer = []
+                var classContent = []
+                var scheduleContainer = []
+                classContainer.push(
+                    <div className={styles.HomeClass}>{classEntity.group}</div>  
+                )
+                for(const scheduleDay in classEntity.timetable){
+                    if(classEntity.timetable[scheduleDay].length > 0){
+                        for(const scheduleEntity of classEntity.timetable[scheduleDay]){
+                            scheduleContainer.push(<HomeContentEntity onClick={() => displayHCDetails(detailsFunc, {time: scheduleEntity.time, room: scheduleEntity.room, type: scheduleEntity.type, title: scheduleEntity.title, host: scheduleEntity.host})} time={scheduleEntity.time} room={scheduleEntity.room} type={scheduleEntity.type} classTime={scheduleEntity.note} title={scheduleEntity.title} host={scheduleEntity.host}/>)
+                        }
+                        var classDay
+                        switch(scheduleDay){
+                            case "mon": {
+                                classDay = "Пн"
+                            }; break;
+                            case "tue": {
+                                classDay = "Вт"
+                            }; break;
+                            case "wed": {
+                                classDay = "Ср"
+                            }; break;
+                            case "thu": {
+                                classDay = "Чт"
+                            }; break;
+                            case "fri": {
+                                classDay = "Пт"
+                            }; break;
+                            case "sat": {
+                                classDay = "Сб"
+                            }; break;
+                            case "sun": {
+                                classDay = "Вс"
+                            }; break;
+                        }
+                        classContent.push(
+                            <div className={styles.HomeClassEntity}>
+                                <div className={styles.HomeClassDay}>{classDay}</div>
+                                <div className={styles.HomeClassDayContent}>
+                                    {scheduleContainer}
+                                </div>
                             </div>
+                        )
+                        scheduleContainer = []
+                    }
+                }
+                classContainer.push(
+                    <div className={styles.HomeClassContent}>
+                        {classContent}
+                    </div>
+                )
+                schedule.push(classContainer)
+
+            }
+        } else {
+            for(const classEntity of timetracker_schedule.classes){
+                var classContainer = []
+                var classContent = []
+                var scheduleContainer = []
+                if(classEntity.group == datasel){
+                    classContainer.push(
+                        <div className={styles.HomeClass}>{classEntity.group}</div>  
+                    )
+                    for(const scheduleDay in classEntity.timetable){
+                        if(classEntity.timetable[scheduleDay].length > 0){
+                            for(const scheduleEntity of classEntity.timetable[scheduleDay]){
+                                scheduleContainer.push(<HomeContentEntity onClick={() => displayHCDetails(detailsFunc, {time: scheduleEntity.time, room: scheduleEntity.room, type: scheduleEntity.type, title: scheduleEntity.title, host: scheduleEntity.host})} time={scheduleEntity.time} room={scheduleEntity.room} type={scheduleEntity.type} classTime={scheduleEntity.note} title={scheduleEntity.title} host={scheduleEntity.host}/>)
+                            }
+                            var classDay
+                            switch(scheduleDay){
+                                case "mon": {
+                                    classDay = "Пн"
+                                }; break;
+                                case "tue": {
+                                    classDay = "Вт"
+                                }; break;
+                                case "wed": {
+                                    classDay = "Ср"
+                                }; break;
+                                case "thu": {
+                                    classDay = "Чт"
+                                }; break;
+                                case "fri": {
+                                    classDay = "Пт"
+                                }; break;
+                                case "sat": {
+                                    classDay = "Сб"
+                                }; break;
+                                case "sun": {
+                                    classDay = "Вс"
+                                }; break;
+                            }
+                            classContent.push(
+                                <div className={styles.HomeClassEntity}>
+                                    <div className={styles.HomeClassDay}>{classDay}</div>
+                                    <div className={styles.HomeClassDayContent}>
+                                        {scheduleContainer}
+                                    </div>
+                                </div>
+                            )
+                            scheduleContainer = []
+                        }
+                    }
+                    classContainer.push(
+                        <div className={styles.HomeClassContent}>
+                            {classContent}
                         </div>
                     )
-                    scheduleContainer = []
+                    schedule.push(classContainer)
                 }
             }
-            classContainer.push(
-                <div className={styles.HomeClassContent}>
-                    {classContent}
-                </div>
-            )
-            schedule.push(classContainer)
-
         }
         console.log(schedule)
         return schedule
@@ -100,11 +159,11 @@ export default function Home(props){
     const fillContent = async () => {
         const data = await getScheduleData()
         setContent(fillSchedule(data, setContentDetails))
-        var filterData = []
+        var filterData = ["Все группы"]
         for(const filterEntity of data.classes){
-            filtersArray.group.push(filterEntity)
+            filterData.push(filterEntity.group)
         }
-        setFilters(<HomeFiltersEntity title="Все группы" content={data} />)
+        setFilters(<HomeFiltersEntity title="Все группы" options={filterData} callback={(e) => {setContent(fillSchedule(data, setContentDetails, e))}} />)
         gsap.fromTo('.IndexPlaceholder', {top: '0%', opacity: '1'}, {top: '-2%', opacity: '0', duration: .5})
         gsap.from('#HomeHead', {y: '50', opacity: '0', duration: 1})
         gsap.from('#HomeBar', {y: '50', opacity: '0', duration: 1, delay: .1})
@@ -123,17 +182,13 @@ export default function Home(props){
             <div id='HomeBar_container' className={styles.HomeBar_container}>
                 <HomeHead userName="" />
                 <div id='HomeBar' className={styles.HomeBar}>
-                    <div style={{"opacity": 1}} id='HomeBar_schedule'>Расписание</div>
+                    <div style={{"opacity": 1, "will-change": "transform"}} id='HomeBar_schedule'>Расписание</div>
                     <div id='HomeBar_rooms'></div>
                     <div id='HomeBar_absent'></div>
                 </div>
                 <div id='HomeSeparator' className={styles.HomeSeparator}></div>
                 <div id='HomeFilters' className={styles.HomeFilters}>
                     {filters}
-                    <HomeFiltersEntity title="2022/2023" />
-                    <HomeFiltersEntity title="Курс 1" />
-                    <HomeFiltersEntity title="Бакалавриат" />
-                    <HomeFiltersEntity title="Очная" />
                 </div>
             </div>
             <div id="HomeContent" className={styles.HomeContent}>
@@ -212,30 +267,49 @@ function HomeContentEntity(props){
     )
 }
 
-function HomeFiltersEntity(props) {
-    var [filterContent, setFilterContent] = useState([])
-    var selectorContent = []
-    for(const selectorEntity of filtersArray.group){
-        console.log(selectorEntity)
-        selectorContent.push(<HomeFiltersSelectorEntity title={selectorEntity.group} />,)
+function HomeFiltersEntity({options, callback}) {
+    const [selected, setSelected] = useState(options[0]);
+    const [expanded, setExpanded] = useState(false);
+    function expand() {
+        setExpanded(false)
+        console.log("expand")
+        setExpanded(true);
+        gsap.fromTo('#HomeFiltersEntity_selector', {y: -20, opacity: 0}, {y: 0, opacity: 1, duration: .2})
     }
-    var filterCompiled = []
-    const displayContents = () => {
-        if(filterState == 0){
-            filterCompiled.push(<div className={styles.HomeFiltersEntity_selector}>{selectorContent}</div>)
-            setFilterContent(filterCompiled)
-            filterState = 1
+
+    function close() {
+        console.log("Fired close")
+        gsap.to('#HomeFiltersEntity_selector', {y: -20, opacity: 0, duration: .2})
+        setTimeout(() => {
+            setExpanded(false);
+        }, 200);
+    }
+
+    function select(event) {
+        const value = event.target.textContent;
+        console.log("Fired select")
+        if(value == "Все группы"){
+            callback()
         } else {
-            setFilterContent([])
-            filterState = 0
+            callback(value);
         }
+        setSelected(value);
+        setExpanded(false)
     }
-    return(
-        <div className={styles.HomeFiltersEntity}>
-            <div onClick={displayContents} className={styles.HomeFiltersButton}>{props.title}</div>
-            {filterContent}
+    return (
+        <div className={styles.HomeFiltersEntity} tabIndex={0} onFocus={expand} onBlur={close} >
+            <div onClick={expand} className={styles.HomeFiltersButton}>{selected}</div>
+            {expanded ? (
+                <div id='HomeFiltersEntity_selector' className={styles.HomeFiltersEntity_selector}>
+                    {options.map((O) => (
+                        <div className={styles.HomeFiltersSelectorEntity} onClick={select}>
+                            {O}
+                        </div>
+                    ))}
+                </div>
+            ) : null}
         </div>
-    )
+    );
 }
 
 function HomeFiltersSelectorEntity(props){

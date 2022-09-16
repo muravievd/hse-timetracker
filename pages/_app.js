@@ -24,8 +24,11 @@ export default function Index() {
   return (
     <div className="IndexContainer">
       <Head>
-        <title>HSE Timetracker</title>
+        <title>Timetracker</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/timetracker-192x192.png" />
+        <meta name="theme-color" content="#fff" />
       </Head>
       {IndexPlaceholder}
       <main>
