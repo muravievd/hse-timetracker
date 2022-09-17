@@ -179,7 +179,12 @@ function parsePage(content){
                 } else {
                     $('.schedule-lesson', e).each((_,i) => {
                         var lesson_title = $('.discipline', i).text().trim()
+                        var n = lesson_title.indexOf('\n')
+                        lesson_title = lesson_title.substring(0, n != -1 ? n : lesson_title.length)
                         var lesson_type = $('.discipline-sub', i).text()
+                        if(lesson_type.includes('Кураторские дисциплины')){
+                            lesson_type = "Куратор"
+                        }
                         var lesson_room = $('.auditory', i).text()
                         var lesson_user = $('.user', i).text()
                         var lesson_time = col_time
@@ -201,7 +206,12 @@ function parsePage(content){
                 } else {
                     $('.schedule-lesson', e).each((_,i) => {
                         var lesson_title = $('.discipline', i).text().trim()
+                        var n = lesson_title.indexOf('\n')
+                        lesson_title = lesson_title.substring(0, n != -1 ? n : lesson_title.length)
                         var lesson_type = $('.discipline-sub', i).text()
+                        if(lesson_type.includes('Кураторские дисциплины')){
+                            lesson_type = "Куратор"
+                        }
                         var lesson_room = $('.auditory', i).text()
                         var lesson_user = $('.user', i).text()
                         var lesson_time = col_time
