@@ -414,11 +414,11 @@
 @media only screen and (max-width: 600px) {
     .HomeBar {
         font-size: 15vw;
-        padding-top: 1vh;
+        padding-top: 0vh;
         width: 100vw;
     }
     .HomeFilters {
-        padding-top: 3vh;
+        padding-top: 2vh;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
@@ -436,7 +436,7 @@
         flex-direction: column;
         padding-left: 5%;
         width: 100%;
-        padding-top: 33vh;
+        padding-top: 28vh;
     }
     .HomeClass {
         font-weight: 600;
@@ -515,5 +515,8 @@
     }
     .HomeFiltersEntity_selector {
         width: 240%;
+    }
+    .HomeSeparator {
+        display: none;
     }
 }
